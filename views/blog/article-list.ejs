@@ -1,0 +1,40 @@
+<%- include('../includes/head.ejs') %>
+<body>
+    <%- include('../includes/nav.ejs') %>
+
+    <main>
+        <% if(article.length > 0) { %>
+            <div class="columns is-4 m-4">
+                <% for(let article of articles) { %>
+                    <div class="column is-one-quarter">
+                        <div class="card">
+
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <div class="media-content">
+                                            <p class="title is-4"><%= article.title%></p>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+                                <div class="content"><%= article.content %></div>
+                            </div>
+                            <footer class="card-footer">
+                                <a class="card-footer-item" href="#" >Details</a>
+                                <a class="card-footer-item" href="/edit-article/<%= article.id %>?edit=true">Edit</a>
+                                <form action="/cart" method="POST">
+                                    <input type="hidden" name="articleId" value="<%= article._id %>" />
+                                    <!-- <input type="hidden" name="price" value="<%= article.price %>" /> -->
+                                    <a class="card-footer-item" href="#" onclick="this.closest('form').submit();return false;" >Add</a>
+                                </form>
+                            </footer>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        <% } else { %>
+            <h1 class="title">No Articles Found!</h1>
+        <% } %>
+    </main>
+<%- include('../includes/end.ejs') %>
